@@ -2,47 +2,62 @@
 
 import ChartWrapper from './components/charts/ChartCard';
 import Pie from './components/charts/Pie';
+import Section from './components/Section';
+import Bars from './components/charts/Bars';
+import Line from './components/charts/Line';
+import TimeMeasurementToggle from './components/TimeToggle';
+
+import { PageWrapper } from './styles/responsive';
+
+import useMetricsChartData from './hooks/useMetricsChartData';
+
+import { percentageFormatter, timeFormatter } from './utils/formatters';
 
 export default function Home() {
-  const data = [
-    {
-      id: 'ruby',
-      label: 'ruby',
-      value: 135,
-      color: 'hsl(186, 70%, 50%)',
-    },
-    {
-      id: 'hack',
-      label: 'hack',
-      value: 48,
-      color: 'hsl(165, 70%, 50%)',
-    },
-    {
-      id: 'scala',
-      label: 'scala',
-      value: 137,
-      color: 'hsl(314, 70%, 50%)',
-    },
-    {
-      id: 'css',
-      label: 'css',
-      value: 455,
-      color: 'hsl(86, 70%, 50%)',
-    },
-    {
-      id: 'sass',
-      label: 'sass',
-      value: 440,
-      color: 'hsl(202, 70%, 50%)',
-    },
-  ];
+  const {
+    fullyUnproductive,
+    downtime,
+    efficiencyDrop,
+    lastAndAverageEfficiency,
+    speedBalanceLoss,
+    goodsBeforePalletizingLoss,
+    timeMeasurement,
+    setTimeMeasurement,
+  } = useMetricsChartData();
 
   return (
     <main>
-      <h1>Home</h1>
-      <ChartWrapper title="Zapppp">
-        <Pie data={data} />
-      </ChartWrapper>
+      <PageWrapper>
+        <Section title="Equipment efficiency">
+          <ChartWrapper title="Last sifht efficiency drop">
+            <Line data={efficiencyDrop} />
+          </ChartWrapper>
+          <ChartWrapper title="Total Working, Cleaning Shift time and Real Efficiency time">
+            <Bars data={lastAndAverageEfficiency} maxValue={100} valueFormatter={percentageFormatter} />
+          </ChartWrapper>
+        </Section>
+        <Section
+          title="Downtime analysis"
+          headerSlot={
+            <TimeMeasurementToggle timeMeasurement={timeMeasurement} toggleTimeMeasurement={setTimeMeasurement} />
+          }
+        >
+          <ChartWrapper title="Fully unproductive time">
+            <Pie data={fullyUnproductive} valueFormatter={(value) => timeFormatter(value, timeMeasurement)} />
+          </ChartWrapper>
+          <ChartWrapper title="Strict downtime">
+            <Pie data={downtime} valueFormatter={(value) => timeFormatter(value, timeMeasurement)} />
+          </ChartWrapper>
+        </Section>
+        <Section title="Losses">
+          <ChartWrapper title="Equipment speed balance">
+            <Bars data={speedBalanceLoss} layout="vertical" />
+          </ChartWrapper>
+          <ChartWrapper title="Goods produced before reaching the palletizer">
+            <Bars data={goodsBeforePalletizingLoss} layout="vertical" />
+          </ChartWrapper>
+        </Section>
+      </PageWrapper>
     </main>
   );
 }

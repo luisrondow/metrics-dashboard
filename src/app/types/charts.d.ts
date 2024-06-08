@@ -1,5 +1,3 @@
-export type ChartData = {
-  id: string;
-  label: string;
-  value: number;
-};
+import { Metric } from "./metrics";
+
+export type ChartData = Pick<Metric, "id" | "label" | "value"> & { type: string };
