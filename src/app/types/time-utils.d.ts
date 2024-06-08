@@ -1,0 +1,1 @@
+export type TimeMeasurement = 'secs' | 'hours';

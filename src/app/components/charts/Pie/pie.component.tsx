@@ -3,24 +3,21 @@ import { ResponsivePie } from '@nivo/pie';
 
 type PieProps = {
   data: ChartData[];
+  valueFormatter?: (value: number) => string;
 };
 
-const Pie = ({ data }: PieProps) => {
-  console.log(data);
-
+const Pie = ({ data, valueFormatter }: PieProps) => {
   return (
     <ResponsivePie
       data={data}
+      valueFormat={valueFormatter}
+      sortByValue
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-      innerRadius={0.5}
-      padAngle={0.7}
-      cornerRadius={3}
+      innerRadius={0}
       activeOuterRadiusOffset={8}
-      borderWidth={1}
-      borderColor={{
-        from: 'color',
-        modifiers: [['darker', 0.2]],
-      }}
+      arcLabel={(d) => valueFormatter?.(d.value) ?? `${d.value}${d.data.type}`}
+      arcLabelsRadiusOffset={0.75}
+      arcLinkLabel={(d) => `${d.label}`}
       arcLinkLabelsSkipAngle={10}
       arcLinkLabelsTextColor="#333333"
       arcLinkLabelsThickness={2}
@@ -30,6 +27,7 @@ const Pie = ({ data }: PieProps) => {
         from: 'color',
         modifiers: [['darker', 2]],
       }}
+      colors={{ scheme: 'pastel1' }}
       defs={[
         {
           id: 'dots',
@@ -52,11 +50,11 @@ const Pie = ({ data }: PieProps) => {
       ]}
       legends={[
         {
-          anchor: 'bottom',
-          direction: 'row',
+          anchor: 'bottom-left',
+          direction: 'column',
           justify: false,
-          translateX: 0,
-          translateY: 56,
+          translateX: -56,
+          translateY: 48,
           itemsSpacing: 0,
           itemWidth: 100,
           itemHeight: 18,
@@ -64,7 +62,7 @@ const Pie = ({ data }: PieProps) => {
           itemDirection: 'left-to-right',
           itemOpacity: 1,
           symbolSize: 18,
-          symbolShape: 'circle',
+          symbolShape: 'square',
           effects: [
             {
               on: 'hover',
