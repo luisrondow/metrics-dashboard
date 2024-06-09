@@ -122,6 +122,7 @@ export default function useMetricsChartData() {
   const goodsBeforePalletizingLoss = useMemo(() => calculateLoss('lbp', 'Goods before pallets'), [calculateLoss]);
 
   return {
+    fetchedMetrics,
     fullyUnproductive,
     downtime,
     lastAndAverageEfficiency,

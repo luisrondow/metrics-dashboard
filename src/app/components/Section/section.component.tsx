@@ -5,14 +5,15 @@ type SectionProps = {
   title: string;
   children: React.ReactNode;
   headerSlot?: React.ReactNode;
+  handleOpenTable?: () => void;
 };
 
-const Section = ({ title, children, headerSlot }: SectionProps) => {
+const Section = ({ title, children, headerSlot, handleOpenTable }: SectionProps) => {
   return (
     <Wrapper>
       <Header>
         <h1>{title}</h1>
-        <Button onClick={() => console.log('Button clicked')}>Show table</Button>
+        {handleOpenTable ? <Button onClick={handleOpenTable}>Show table</Button> : null}
         {headerSlot}
       </Header>
       <StyledSection>{children}</StyledSection>
