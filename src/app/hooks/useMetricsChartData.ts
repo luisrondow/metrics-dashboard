@@ -8,7 +8,7 @@ const FULLY_UNPRODUCTIVE_METRIC_IDS = ["mech_problems", "unexplained", "cln_shif
 const DEFAULT_TIME_MEASUREMENT = "secs";
 
 export default function useMetricsChartData() {
-  const { metrics: fetchedMetrics } = useFetchMetrics();
+  const { metrics: fetchedMetrics, isFetching, isError } = useFetchMetrics();
 
   const [timeMeasurement, setTimeMeasurement] = useState<TimeMeasurement>(DEFAULT_TIME_MEASUREMENT);
 
@@ -123,13 +123,15 @@ export default function useMetricsChartData() {
 
   return {
     fetchedMetrics,
+    isFetching,
+    isError,
+    timeMeasurement,
+    setTimeMeasurement,
     fullyUnproductive,
     downtime,
     lastAndAverageEfficiency,
     efficiencyDrop,
     speedBalanceLoss,
     goodsBeforePalletizingLoss,
-    timeMeasurement,
-    setTimeMeasurement,
   };
 }
