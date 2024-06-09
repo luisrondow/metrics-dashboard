@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import { PageWrapper } from './styles/responsive';
 
+import Header from './components/Header';
 import ChartWrapper from './components/charts/ChartCard';
 import Pie from './components/charts/Pie';
 import Section from './components/Section';
@@ -23,6 +24,8 @@ import { DOWNTIME_METRICS_IDS, EFFICIENCY_METRICS_IDS, LOSS_METRICS_IDS } from '
 export default function Home() {
   const {
     fetchedMetrics,
+    isFetching,
+    isError,
     fullyUnproductive,
     downtime,
     efficiencyDrop,
@@ -44,15 +47,20 @@ export default function Home() {
     setTableData(fetchedMetrics, metricsIds);
   };
 
+  if (isError) {
+    return <div>Something went wrong!</div>;
+  }
+
   return (
     <>
+      <Header />
       <main>
         <PageWrapper>
           <Section title="Equipment efficiency" handleOpenTable={() => handleOpenTableModal(EFFICIENCY_METRICS_IDS)}>
-            <ChartWrapper title="Last sifht efficiency drop">
+            <ChartWrapper title="Last sifht efficiency drop" isLoading={isFetching}>
               <Line data={efficiencyDrop} />
             </ChartWrapper>
-            <ChartWrapper title="Total Working, Cleaning Shift time and Real Efficiency time">
+            <ChartWrapper title="Total Working, Cleaning Shift time and Real Efficiency time" isLoading={isFetching}>
               <Bars data={lastAndAverageEfficiency} maxValue={100} valueFormatter={percentageFormatter} />
             </ChartWrapper>
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
@@ -66,18 +74,18 @@ export default function Home() {
             }
             handleOpenTable={() => handleOpenTableModal(DOWNTIME_METRICS_IDS)}
           >
-            <ChartWrapper title="Fully unproductive time">
+            <ChartWrapper title="Fully unproductive time" isLoading={isFetching}>
               <Pie data={fullyUnproductive} valueFormatter={(value) => timeFormatter(value, timeMeasurement)} />
             </ChartWrapper>
-            <ChartWrapper title="Strict downtime">
+            <ChartWrapper title="Strict downtime" isLoading={isFetching}>
               <Pie data={downtime} valueFormatter={(value) => timeFormatter(value, timeMeasurement)} />
             </ChartWrapper>
           </Section>
           <Section title="Losses" handleOpenTable={() => handleOpenTableModal(LOSS_METRICS_IDS)}>
-            <ChartWrapper title="Equipment speed balance">
+            <ChartWrapper title="Equipment speed balance" isLoading={isFetching}>
               <Bars data={speedBalanceLoss} layout="vertical" />
             </ChartWrapper>
-            <ChartWrapper title="Goods produced before reaching the palletizer">
+            <ChartWrapper title="Goods produced before reaching the palletizer" isLoading={isFetching}>
               <Bars data={goodsBeforePalletizingLoss} layout="vertical" />
             </ChartWrapper>
           </Section>
