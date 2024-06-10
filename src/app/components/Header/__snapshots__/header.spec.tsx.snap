@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Component matches snapshot 1`] = `
+<DocumentFragment>
+  <header
+    class="sc-5dbe63cf-0 giLltp"
+  >
+    <h1>
+      Metrics Dashboard
+    </h1>
+  </header>
+</DocumentFragment>
+`;

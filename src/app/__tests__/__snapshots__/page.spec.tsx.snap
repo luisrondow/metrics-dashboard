@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="header"
+  >
+    Header
+  </div>
+  <main>
+    <div
+      class="sc-b2ca270-0 jhJwBs"
+    >
+      <div
+        data-testid="section"
+      >
+        <h2>
+          Equipment efficiency
+        </h2>
+        <div
+          data-testid="chart-card"
+        >
+          <div>
+            Last sifht efficiency drop
+          </div>
+          <div
+            data-testid="line-chart"
+          >
+            <div>
+              x: A, y: 30
+            </div>
+          </div>
+        </div>
+        <div
+          data-testid="chart-card"
+        >
+          <div>
+            Total Working, Cleaning Shift time and Real Efficiency time
+          </div>
+          <div
+            data-testid="bars-chart"
+          >
+            <div>
+              40%
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        data-testid="section"
+      >
+        <h2>
+          Downtime analysis
+        </h2>
+        <div
+          data-testid="time-toggle"
+        >
+          <button>
+            Toggle Time
+          </button>
+        </div>
+        <div
+          data-testid="chart-card"
+        >
+          <div>
+            Fully unproductive time
+          </div>
+          <div
+            data-testid="pie-chart"
+          >
+            <div>
+              10s
+            </div>
+          </div>
+        </div>
+        <div
+          data-testid="chart-card"
+        >
+          <div>
+            Strict downtime
+          </div>
+          <div
+            data-testid="pie-chart"
+          >
+            <div>
+              20s
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        data-testid="section"
+      >
+        <h2>
+          Losses
+        </h2>
+        <div
+          data-testid="chart-card"
+        >
+          <div>
+            Equipment speed balance
+          </div>
+          <div
+            data-testid="bars-chart"
+          >
+            <div>
+              50
+            </div>
+          </div>
+        </div>
+        <div
+          data-testid="chart-card"
+        >
+          <div>
+            Goods produced before reaching the palletizer
+          </div>
+          <div
+            data-testid="bars-chart"
+          >
+            <div>
+              60
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div
+    id="modal-root"
+  />
+</DocumentFragment>
+`;

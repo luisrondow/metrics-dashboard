@@ -1,5 +1,5 @@
 import { TimeMeasurement } from '@/app/types/time-utils';
-import Switch from '@/app/components/Switch';
+import Switch from '../Switch';
 
 import { Wrapper } from './time-toggle.styles';
 import { Dispatch, SetStateAction } from 'react';
