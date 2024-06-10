@@ -12,6 +12,11 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  flex-direction: column;
+
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+  }
 `;
 
 export const Section = styled.section`

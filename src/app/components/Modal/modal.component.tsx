@@ -31,9 +31,9 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
 
   return mounted
     ? createPortal(
-        <ModalBackground isOpen={isOpen} onClick={onClose}>
-          <ModalContent onClick={(e) => e.stopPropagation()}>
-            <ModalHeader>
+        <ModalBackground $isOpen={isOpen} onClick={onClose}>
+          <ModalContent data-cy="modal" onClick={(e) => e.stopPropagation()}>
+            <ModalHeader data-cy="modal-header">
               <CloseIcon onClick={onClose} />
             </ModalHeader>
             {children}

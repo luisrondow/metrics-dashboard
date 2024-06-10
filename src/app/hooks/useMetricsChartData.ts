@@ -10,6 +10,8 @@ const DEFAULT_TIME_MEASUREMENT = "secs";
 export default function useMetricsChartData() {
   const { metrics: fetchedMetrics, isFetching, isError } = useFetchMetrics();
 
+  console.log(fetchedMetrics);
+
   const [timeMeasurement, setTimeMeasurement] = useState<TimeMeasurement>(DEFAULT_TIME_MEASUREMENT);
 
   const metrics = useMemo(() => {

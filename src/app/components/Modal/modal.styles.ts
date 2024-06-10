@@ -1,14 +1,11 @@
 import styled, { css } from "styled-components";
 
-export const ModalBackground = styled.div<{ isOpen: boolean }>`
-  ${({ isOpen }) =>
-    isOpen
-      ? css`
-          display: block;
-        `
-      : css`
-          display: none;
-        `}
+type ModalBackgroundProps = {
+  $isOpen: boolean;
+};
+
+export const ModalBackground = styled.div<ModalBackgroundProps>`
+  display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
 
   position: fixed;
   top: 0;
