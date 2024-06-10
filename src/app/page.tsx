@@ -1,8 +1,6 @@
 'use client';
 import { Nunito } from 'next/font/google';
-
-import { useState } from 'react';
-
+import { useState, useCallback } from 'react';
 import { PageWrapper } from './styles/responsive';
 
 import Header from './components/Header';
@@ -19,7 +17,6 @@ import useMetricsChartData from './hooks/useMetricsChartData';
 import useTableData from './hooks/useTableData';
 
 import { percentageFormatter, timeFormatter } from './utils/formatters';
-
 import { DOWNTIME_METRICS_IDS, EFFICIENCY_METRICS_IDS, LOSS_METRICS_IDS } from './utils/metrics';
 
 const nunito = Nunito({ subsets: ['latin'] });
@@ -43,12 +40,15 @@ export default function Home() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenTableModal = (metricsIds: string[]) => {
-    if (!fetchedMetrics) return;
-
-    setIsModalOpen(true);
-    setTableData(fetchedMetrics, metricsIds);
-  };
+  const handleOpenTableModal = useCallback(
+    (metricsIds: string[]) => {
+      if (fetchedMetrics) {
+        setIsModalOpen(true);
+        setTableData(fetchedMetrics, metricsIds);
+      }
+    },
+    [fetchedMetrics, setTableData],
+  );
 
   if (isError) {
     return <div>Something went wrong!</div>;
@@ -59,7 +59,7 @@ export default function Home() {
       <Header />
       <PageWrapper>
         <Section title="Equipment efficiency" handleOpenTable={() => handleOpenTableModal(EFFICIENCY_METRICS_IDS)}>
-          <ChartWrapper title="Last sifht efficiency drop" isLoading={isFetching}>
+          <ChartWrapper title="Last shift efficiency drop" isLoading={isFetching}>
             <Line data={efficiencyDrop} />
           </ChartWrapper>
           <ChartWrapper title="Total Working, Cleaning Shift time and Real Efficiency time" isLoading={isFetching}>

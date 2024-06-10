@@ -1,7 +1,9 @@
 import { ResponsiveBar } from '@nivo/bar';
 
+import { BarChartData } from '@/app/types/charts';
+
 type BarsProps = {
-  data: any[];
+  data: BarChartData[];
   maxValue?: number;
   valueFormatter?: (value: number) => string;
   layout?: 'vertical' | 'horizontal';

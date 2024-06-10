@@ -1,7 +1,8 @@
+import { LineChartData } from '@/app/types/charts';
 import { ResponsiveLine } from '@nivo/line';
 
 export type LineProps = {
-  data: any[];
+  data: LineChartData[];
 };
 
 const Line = ({ data }: LineProps) => (
