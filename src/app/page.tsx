@@ -1,4 +1,5 @@
 'use client';
+import { Nunito } from 'next/font/google';
 
 import { useState } from 'react';
 
@@ -20,6 +21,8 @@ import useTableData from './hooks/useTableData';
 import { percentageFormatter, timeFormatter } from './utils/formatters';
 
 import { DOWNTIME_METRICS_IDS, EFFICIENCY_METRICS_IDS, LOSS_METRICS_IDS } from './utils/metrics';
+
+const nunito = Nunito({ subsets: ['latin'] });
 
 export default function Home() {
   const {
@@ -52,46 +55,44 @@ export default function Home() {
   }
 
   return (
-    <>
+    <main className={nunito.className}>
       <Header />
-      <main>
-        <PageWrapper>
-          <Section title="Equipment efficiency" handleOpenTable={() => handleOpenTableModal(EFFICIENCY_METRICS_IDS)}>
-            <ChartWrapper title="Last sifht efficiency drop" isLoading={isFetching}>
-              <Line data={efficiencyDrop} />
-            </ChartWrapper>
-            <ChartWrapper title="Total Working, Cleaning Shift time and Real Efficiency time" isLoading={isFetching}>
-              <Bars data={lastAndAverageEfficiency} maxValue={100} valueFormatter={percentageFormatter} />
-            </ChartWrapper>
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-              <Table columns={columns} data={data} />
-            </Modal>
-          </Section>
-          <Section
-            title="Downtime analysis"
-            headerSlot={
-              <TimeMeasurementToggle timeMeasurement={timeMeasurement} toggleTimeMeasurement={setTimeMeasurement} />
-            }
-            handleOpenTable={() => handleOpenTableModal(DOWNTIME_METRICS_IDS)}
-          >
-            <ChartWrapper title="Fully unproductive time" isLoading={isFetching}>
-              <Pie data={fullyUnproductive} valueFormatter={(value) => timeFormatter(value, timeMeasurement)} />
-            </ChartWrapper>
-            <ChartWrapper title="Strict downtime" isLoading={isFetching}>
-              <Pie data={downtime} valueFormatter={(value) => timeFormatter(value, timeMeasurement)} />
-            </ChartWrapper>
-          </Section>
-          <Section title="Losses" handleOpenTable={() => handleOpenTableModal(LOSS_METRICS_IDS)}>
-            <ChartWrapper title="Equipment speed balance" isLoading={isFetching}>
-              <Bars data={speedBalanceLoss} layout="vertical" />
-            </ChartWrapper>
-            <ChartWrapper title="Goods produced before reaching the palletizer" isLoading={isFetching}>
-              <Bars data={goodsBeforePalletizingLoss} layout="vertical" />
-            </ChartWrapper>
-          </Section>
-        </PageWrapper>
-      </main>
+      <PageWrapper>
+        <Section title="Equipment efficiency" handleOpenTable={() => handleOpenTableModal(EFFICIENCY_METRICS_IDS)}>
+          <ChartWrapper title="Last sifht efficiency drop" isLoading={isFetching}>
+            <Line data={efficiencyDrop} />
+          </ChartWrapper>
+          <ChartWrapper title="Total Working, Cleaning Shift time and Real Efficiency time" isLoading={isFetching}>
+            <Bars data={lastAndAverageEfficiency} maxValue={100} valueFormatter={percentageFormatter} />
+          </ChartWrapper>
+          <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <Table columns={columns} data={data} />
+          </Modal>
+        </Section>
+        <Section
+          title="Downtime analysis"
+          headerSlot={
+            <TimeMeasurementToggle timeMeasurement={timeMeasurement} toggleTimeMeasurement={setTimeMeasurement} />
+          }
+          handleOpenTable={() => handleOpenTableModal(DOWNTIME_METRICS_IDS)}
+        >
+          <ChartWrapper title="Fully unproductive time" isLoading={isFetching}>
+            <Pie data={fullyUnproductive} valueFormatter={(value) => timeFormatter(value, timeMeasurement)} />
+          </ChartWrapper>
+          <ChartWrapper title="Strict downtime" isLoading={isFetching}>
+            <Pie data={downtime} valueFormatter={(value) => timeFormatter(value, timeMeasurement)} />
+          </ChartWrapper>
+        </Section>
+        <Section title="Losses" handleOpenTable={() => handleOpenTableModal(LOSS_METRICS_IDS)}>
+          <ChartWrapper title="Equipment speed balance" isLoading={isFetching}>
+            <Bars data={speedBalanceLoss} layout="vertical" />
+          </ChartWrapper>
+          <ChartWrapper title="Goods produced before reaching the palletizer" isLoading={isFetching}>
+            <Bars data={goodsBeforePalletizingLoss} layout="vertical" />
+          </ChartWrapper>
+        </Section>
+      </PageWrapper>
       <div id="modal-root"></div>
-    </>
+    </main>
   );
 }

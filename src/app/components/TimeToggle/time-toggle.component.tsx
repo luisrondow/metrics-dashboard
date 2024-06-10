@@ -11,7 +11,7 @@ type TimeMeasurementToggleProps = {
 
 const TimeMeasurementToggle = ({ timeMeasurement, toggleTimeMeasurement }: TimeMeasurementToggleProps) => {
   return (
-    <Wrapper>
+    <Wrapper data-cy="time-measurment-toggle">
       <span>Seconds</span>
       <Switch
         checked={timeMeasurement === 'hours'}

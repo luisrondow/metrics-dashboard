@@ -11,9 +11,9 @@ const ChartWrapper = ({ children, title, isLoading }: ChartWrapperProps) => {
   return (
     <Wrapper>
       <Header>
-        <Title>{title}</Title>
+        <Title data-cy="chart-title">{title}</Title>
       </Header>
-      <Content>{isLoading ? <SpinnerLoader /> : children}</Content>
+      <Content data-cy="chart-card">{isLoading ? <SpinnerLoader /> : children}</Content>
     </Wrapper>
   );
 };
