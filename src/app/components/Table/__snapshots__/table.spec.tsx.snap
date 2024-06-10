@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table Component matches snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Age
+          </th>
+          <th>
+            Address
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Jose da Silva
+          </td>
+          <td>
+            28
+          </td>
+          <td>
+            Rua de Camoes
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Joao Pedro
+          </td>
+          <td>
+            34
+          </td>
+          <td>
+            Rua de Faria Guimaraes
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Ines Tavares
+          </td>
+          <td>
+            22
+          </td>
+          <td>
+            Rua de Costa Cabral
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
