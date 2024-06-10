@@ -1,36 +1,144 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Metrics Dashboard
 
-## Getting Started
+This project demonstrates the implementation of a metrics dashboard with various charts and data visualizations. The dashboard includes sections for equipment efficiency, downtime analysis, and losses, with detailed metrics and charts for each. It also possible to visualize the raw data in a table format.
 
-First, run the development server:
+FYI: To calculate the gain over the loss, I've used the efficiency average as a reference. The formula used is: `gain = loss / (1 - efficiency)`.
 
-```bash
+## Table of Contents
+
+- [Stack used](#stack-used)
+- [Available Scripts](#available-scripts)
+- [Project Structure](#project-structure)
+- [Testing](#testing)
+
+## Stack used
+
+I've used the following technologies to build this project:
+
+- [Next.js](https://nextjs.org/)
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Syled Components](https://styled-components.com/)
+
+- [MSW](https://mswjs.io/)
+  - For mocking API requests
+- [Nivo](https://nivo.rocks/)
+  - For building the charts using D3.js under the hood
+- [React Query](https://react-query.tanstack.com/)
+  - For fetching and caching data
+- [Testing Library](https://testing-library.com/)
+  - Unit tests
+- [Cypress](https://www.cypress.io/)
+  - End-to-end tests
+
+## Available Scripts
+
+### Installation
+
+1. **Clone the repository:**
+
+    ```sh
+    git clone https://github.com/your-username/metrics-dashboard.git
+    ```
+
+2. **Navigate to the project directory:**
+
+    ```sh
+    cd metrics-dashboard
+    ```
+
+3. **Install dependencies:**
+
+    ```sh
+    npm install
+    ```
+
+### Running the Project
+
+To start the development server, run:
+
+```sh
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+Open http://localhost:3000 in your browser to view the application.
+
+### Building the Project
+
+To build the project, run:
+
+```sh
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+then:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Project Structure
 
-## Learn More
+The project is structured as follows:
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── components/
+│   ├── charts/
+│   │   ├── Bars
+│   │   ├── ChartCard
+│   │   ├── Line
+│   │   └── Pie
+│   ├── Header
+│   ├── Modal
+│   ├── Section
+│   ├── Table
+│   └── TimeToggle
+├── hooks/
+│   ├── useFetchMetrics.ts
+│   ├── useMetricsChartData.ts
+│   └── useTableData.ts
+├── lib/
+│   ├── react-query-provider.tsx
+│   └── registry.ts
+├── mocks/
+│   ├── api/
+│   │   ├── data/
+│   │   │   └── metrics.json
+│   │   └── metrics.ts
+│   ├── handlers/
+│   │   └── index.ts
+│   ├── mswServer.ts
+│   ├── mswBrowser.ts
+│   └── provider.tsx
+├── styles/
+│   ├── global.css
+│   └── responsive.ts
+├── utils/
+│   ├── formatters.ts
+│   ├── metrics.ts
+│   └── time.ts
+└── types/
+    ├── charts.d.ts
+    ├── metrics.d.ts
+    └── time-utils.d.ts
+├── layout.tsx
+└── page.tsx
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Testing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Unit Tests
 
-## Deploy on Vercel
+To run the unit tests, run:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```sh
+npm run test
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### End-to-End Tests
+
+To run the end-to-end tests, run:
+
+```sh
+npm run cypress:open
+```
