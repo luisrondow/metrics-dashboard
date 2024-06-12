@@ -55,6 +55,8 @@ I've used the following technologies to build this project:
 
 ### Running the Project
 
+Create a `.env.local` file in the root of the project and add the environment variables like in `.env.example`.
+
 To start the development server, run:
 
 ```sh
